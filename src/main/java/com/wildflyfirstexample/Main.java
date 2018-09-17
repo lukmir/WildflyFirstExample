@@ -11,7 +11,7 @@ public class Main {
 
         UndertowFraction undertowFraction = new UndertowFraction();
         undertowFraction.applyDefaults();
-        undertowFraction.httpPort(12345);
+        //undertowFraction.httpPort(12345);
 
         Swarm swarm = new Swarm();
         swarm.fraction(undertowFraction);
