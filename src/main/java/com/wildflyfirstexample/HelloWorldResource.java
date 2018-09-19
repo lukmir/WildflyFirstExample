@@ -9,7 +9,6 @@ public class HelloWorldResource {
 
     @GET
     @Path("hello")
-    //@Produces("{text/plain}")
     public String hello() {
         return "Hello world!";
     }
