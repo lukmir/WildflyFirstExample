@@ -32,6 +32,11 @@
     </dependencies>
 
     <build>
+
+        <directory>C:\Users\Mirocha\IdeaProjects\WildflyFirstExample\target</directory>
+        <finalName>WildflyFirstExample-1.0-SNAPSHOT</finalName>
+
+
         <plugins>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
@@ -40,12 +45,16 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.wildfly.swarm</groupId>
                 <artifactId>wildfly-swarm-plugin</artifactId>
                 <version>${version.wildfly.swarm}</version>
                 <configuration>
                     <mainClass>com.wildflyfirstexample.Main</mainClass>
+                    <properties>
+                        <java.net.preferIPv4Stack>true</java.net.preferIPv4Stack>
+                    </properties>
                 </configuration>
                 <executions>
                     <execution>
@@ -56,6 +65,28 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <repository>lukmir/wildfly</repository>
+                    <tag>1.0</tag>
+                    <buildArgs>
+                        <JAR_FILE>${project.build.finalName}-swarm.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
